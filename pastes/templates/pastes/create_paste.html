@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Create Paste</title>
+    <!-- Highlight.js CSS (GitHub Dark Theme) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/material-darker.min.css"
+      integrity="sha512-2OhXH4Il3n2tHKwLLSDPhrkgnLBC+6lHGGQzSFi3chgVB6DJ/v6+nbx+XYO9CugQyHVF/8D/0k3Hx1eaUK2K9g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- CodeMirror CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css"
+    />
+    <style>
+      body {
+        background-color: #212121;
+        color: #c9d1d9;
+        font-family: Arial, sans-serif;
+      }
+      .CodeMirror {
+        height: auto;
+      }
+      button {
+        cursor: pointer;
+        outline: 0;
+        color: #fff;
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+        display: inline-block;
+        font-weight: 400;
+        line-height: 1.5;
+        text-align: center;
+        border: 1px solid transparent;
+        padding: 6px 12px;
+        font-size: 16px;
+        border-radius: 0.25rem;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+          border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      }
+      button:hover {
+        color: #fff;
+        background-color: #0b5ed7;
+        border-color: #0a58ca;
+      }
+    </style>
+  </head>
+  <body>
+    {% if error %}
+    <p style="color: #f85149">{{ error }}</p>
+    {% endif %}
+    <form method="post">
+      {% csrf_token %}
+      <textarea
+        id="code_area"
+        name="code_area"
+        placeholder="Enter your code here..."
+      ></textarea
+      ><br />
+      <button title="Save">Save</button>
+    </form>
+
+    <!-- CodeMirror und Highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        var editor = CodeMirror.fromTextArea(
+          document.getElementById("code_area"),
+          {
+            lineNumbers: true,
+            mode: "javascript",
+            theme: "material-darker",
+            autoCloseBrackets: true,
+            matchBrackets: true,
+            indentUnit: 4,
+            tabSize: 4,
+            indentWithTabs: true,
+            viewportMargin: Infinity,
+          }
+        );
+      });
+    </script>
+  </body>
+</html>

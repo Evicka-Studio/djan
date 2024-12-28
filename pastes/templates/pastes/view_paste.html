@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Paste {{ paste.id }}</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/base16/material-darker.min.css"
+      integrity="sha512-fLZhcY6YjIKMoqyI1NjeRHVd0bdeu9t+pE2XRhNqAcAc5pPfygr6Dsud9CSHfWyGsNHDapv4iyZTSipANZETiA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      body {
+        background-color: #212121;
+        color: #c9d1d9;
+      }
+    </style>
+  </head>
+  <body>
+    <pre><code>{{ paste.code|safe }}</code></pre>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        document.querySelectorAll("pre code").forEach((el) => {
+          hljs.highlightElement(el);
+        });
+      });
+    </script>
+  </body>
+</html>
