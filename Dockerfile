@@ -4,14 +4,17 @@ FROM python:3.9-slim
 # Set work directory.
 WORKDIR /app
 
-# Copy project files (adjust paths as needed).
-COPY . /app
+# Copy only requirements.txt first.
+COPY requirements.txt /app/
 
 # Install Python dependencies.
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose port 8000 (Django default or your choice).
+# Copy the rest of the application code.
+COPY . /app
+
+# Expose port 8000.
 EXPOSE 8000
 
-# Run Gunicorn serving the wsgi application.
+# Run Gunicorn.
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "my_project.wsgi:application"]
