@@ -13,8 +13,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code.
 COPY . /app
 
-# Expose port 8000.
-EXPOSE 8000
+# Expose port 1274.
+EXPOSE 1274
 
 # Run Gunicorn.
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "my_project.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:1274", "my_project.wsgi:application"]
